@@ -15,6 +15,9 @@ import os
 # field takes. Steers clear of the worn angles (LGTM/shipping,
 # outliving us, TODO-from-2019/git-blame, the void, the heat death);
 # plain ASCII, so bytes equal characters for the size tie-break.
+# Field check 24 Nov 12:44 WIB (866 titles): the "tests pass" setup is
+# common (25 titles) but the twist — tests that test nothing about
+# what the code actually does — has zero neighbours ("test what": 0).
 ENTRY = (
     "Approved. All 400 tests pass, and none of them tests what this "
     "actually does."
@@ -28,6 +31,7 @@ def main():
     assert text.strip(), "entry must not be only whitespace"
     assert text == text.strip(), "no leading/trailing whitespace"
     assert "\n" not in text, "entry must be a single line"
+    assert "\r" not in text, "no carriage return: one clean line"
     # The comment must survive as written: an approval, the 400-test
     # setup, and the punchline about what the tests never check — no
     # stray whitespace or doubled spaces sneaking in between revisions.
